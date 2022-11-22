@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，为了对sql语句进行隔离，方便管理 ，mapper开发dao方式，使用namespace有特殊作用 -->
+<mapper namespace="com.etc.jn.dao.UserDao">
+<!-- 在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象
+mapper.xml以statement为单位管理sql语句
+ -->
+    <select id="queryUserByUsernameAndUserpwd" resultType="user">
+    select * from jn_user where jn_username=#{param1} and jn_userpwd=#{param2}
+    </select>
+
+    <select id="queryPostByUserid" resultType="post">
+    select * from jn_post where jn_userid=#{param1} ORDER BY jn_posttime DESC limit #{param2},#{param3}
+    </select>
+
+    <select id="queryFansNumberByUserid" resultType="fansCount">
+    select count(*) as fansnumber from jn_fans where jn_userid=#{param1}
+    </select>
+    <select id="queryCollectionNumberByUserid" resultType="fansCount">
+    select count(*) as fansnumber from jn_collection where jn_userid=#{param1}
+    </select>
+    <select id="queryHistoryNumberByUserid" resultType="fansCount">
+    select count(*) as fansnumber from jn_history where jn_userid=#{param1}
+    </select>
+
+    <select id="queryPostByUserid2" resultType="post">
+    select * from jn_post where jn_userid=#{param1} ORDER BY jn_posttime DESC limit 0,3
+    </select>
+
+    <select id="queryConcernNumberByUserid" resultType="fansCount">
+    select count(*) as fansnumber from jn_fans where jn_fansid=#{param1}
+    </select>
+
+    <insert id="addUser" parameterType="user">
+    insert into jn_user(jn_username,jn_userpwd,jn_useremail,jn_usersex,jn_userstatus,jn_usersignature) value(#{jn_username},#{jn_userpwd},#{jn_useremail},#{jn_usersex},"已激活","这个人很懒，什么都没留下")
+</insert>
+    <select id="queryCollectionidByUserid" resultType="collectionDto">
+     select * from jn_collection join jn_post on jn_collection.jn_postid=jn_post.jn_postid where jn_collection.jn_userid=#{param1}  ORDER BY jn_posttime DESC limit #{param2},#{param3}
+    </select>
+    <select id="queryHistoryByUserid" resultType="HistoryDto">
+     select * from jn_history join jn_post on jn_history.jn_postid=jn_post.jn_postid where jn_history.jn_userid=#{param1}  ORDER BY jn_posttime DESC limit #{param2},#{param3}
+    </select>
+    <select id="queryFollowDtoByUserid" resultType="FollowDto">
+     select * from jn_fans join jn_post on jn_fans.jn_userid=jn_post.jn_userid where jn_fans.jn_userid=#{param1}  ORDER BY jn_posttime DESC limit #{param2},#{param3}
+    </select>
+    <update id="updateUserByid" parameterType="user">
+       update jn_user as u set u.jn_userpwd=#{jn_userpwd},u.jn_useremail=#{jn_useremail},u.jn_userlogo=#{jn_userlogo},u.jn_usersex=#{jn_usersex},u.jn_usersignature=#{jn_usersignature} where u.jn_userid=#{jn_userid}
+    </update>
+    <select id="queryEmmailByEmail" resultType="useremailvo">
+        select count(*) as jn_useremail from jn_user where jn_useremail=#{jn_useremail}
+    </select>
+</mapper>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，为了对sql语句进行隔离，方便管理 ，mapper开发dao方式，使用namespace有特殊作用 -->
+<mapper namespace="com.etc.jn.dao.PostDao">
+<!-- 在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象
+mapper.xml以statement为单位管理sql语句
+ -->
+<insert id="addPost" parameterType="post">
+    insert into jn_post(jn_posttitle,jn_postcontent,jn_posttime,jn_userid,jn_logo) value(#{jn_posttitle},#{jn_postcontent},#{jn_posttime},#{jn_userid.jn_userid},#{jn_logo})
+</insert>
+<select id="quaryPostidByUseridAndPosttime" resultType="postidvo">
+    select jn_postid from jn_post where jn_userid=#{param1} and jn_posttime=#{param2}
+</select>
+ <select id="queryAllpost" resultType="post">
+    select * from jn_post limit #{param1},#{param2}
+    </select>
+    <select id="queryPostbytype" resultType="post">
+    SELECT * from jn_post
+    JOIN jn_post_posttype ON jn_post_posttype.jn_postid=jn_post.jn_postid
+    JOIN jn_posttype ON jn_post_posttype.jn_posttypeid=jn_posttype.jn_posttypeid
+    WHERE jn_posttype.jn_posttypename=#{param1} limit #{param2},#{param3}
+    </select>
+    <select id="queryPostbykeyword" resultType="post">
+    select * from jn_post where jn_posttitle like concat( '%' , #{param1}, '%')
+    or jn_postcontent like concat( '%' , #{param1}, '%') limit #{param2},#{param3}
+    </select>
+    <select id="queryPostbyid" resultType="post">
+    select * from jn_post where jn_postid=#{postid}
+    </select>
+    <delete id="deletePostByPostid">
+delete from jn_post where jn_postid=#{param1}
+    </delete>
+    <update id="updatePostByPost" parameterType="post">
+      update jn_post as p set p.jn_logo=#{jn_logo},p.jn_posttime=#{jn_posttime},p.jn_posttitle=#{jn_posttitle} where p.jn_postid=#{jn_postid}
+    </update>
+</mapper>
+

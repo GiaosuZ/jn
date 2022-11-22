@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，为了对sql语句进行隔离，方便管理 ，mapper开发dao方式，使用namespace有特殊作用 -->
+<mapper namespace="com.etc.jn.dao.CollectionDao">
+<!-- 在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象
+mapper.xml以statement为单位管理sql语句
+ -->
+    <select id="queryUserCollectionByUseridandPagSize" resultType="collectionDto">
+        select jp.jn_posttitle,jp.jn_posttime,jp.jn_views,jp.jn_heat,jp.jn_logo,jp.jn_postcontent,ju.jn_username from jn_collection as jc inner join jn_post as jp inner join jn_user as ju where jc.jn_userid = #{param1} and jp.jn_postid = jc.jn_postid order by jp.jn_posttime desc limit #{param2},#{param3}
+    </select>
+    <select id="queryCollectionCount" resultType="Integer">
+        select count(*) as count from jn_collection as jc inner join jn_post as jp inner join jn_user as ju where jc.jn_userid = 1 and jp.jn_postid = jc.jn_postid
+    </select>
+
+</mapper>
+

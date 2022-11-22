@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，为了对sql语句进行隔离，方便管理 ，mapper开发dao方式，使用namespace有特殊作用 -->
+<mapper namespace="com.etc.jnbackstage.dao.UserDao">
+<!-- 在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象
+mapper.xml以statement为单位管理sql语句
+ -->
+    <select id="queryUserByUsernameAndUserpwd" resultType="user">
+        select jn_manageid,jn_managename,jn_managepwd,jn_managestatus,jn_managelogo from jn_manage where jn_managename = #{param1} and jn_managepwd = #{param2}
+    </select>
+    <select id="queryUserByUserstatus" resultType="users">
+        select jn_userid,jn_username,jn_userpwd,jn_usersex,jn_usertel,jn_useremail,jn_userstatus from jn_user
+    </select>
+    <update id="updateUsersByuserid" parameterType="integer">
+        update jn_user set jn_userstatus = "已注销" where jn_userid = #{param1}
+    </update>
+    <update id="updateUsersOpenByuserid" parameterType="integer">
+        update jn_user set jn_userstatus = "已激活" where jn_userid = #{param1}
+    </update>
+
+    <select id="queryUserByManage" resultType="user">
+        select jn_manageid,jn_managename,jn_managepwd,jn_managesex,jn_managetel,jn_manageeamil,jn_managestatus from jn_manage
+    </select>
+    <update id="updateMannageDownById" parameterType="integer">
+        update jn_manage set jn_managestatus = jn_managestatus+1 where jn_manageid = #{param1}
+    </update>
+    <update id="updateMannageUpById" parameterType="integer">
+        update jn_manage set jn_managestatus = jn_managestatus-1 where jn_manageid = #{param1}
+    </update>
+    <update id="updateMannageDeletById" parameterType="integer">
+        update jn_manage set jn_managestatus = 0 where jn_manageid = #{param1}
+    </update>
+    <insert id="insertNewManage" parameterType="user">
+        insert into jn_manage(jn_managename,jn_managepwd,jn_manageeamil,jn_managetel,jn_managesex,jn_managestatus) values(#{jn_managename},#{jn_managepwd},#{jn_manageeamil},#{jn_managetel},#{jn_managesex},"2")
+    </insert>
+    <select id="queryManageById" resultType="user">
+        select jn_manageid,jn_managename,jn_managepwd,jn_manageeamil,jn_managetel,jn_managesex,jn_managestatus from jn_manage where jn_manageid = #{param1}
+    </select>
+    <update id="updateMannageById" parameterType="user">
+        update jn_manage set jn_managename =#{jn_managename} ,jn_managepwd = #{jn_managepwd},jn_manageeamil = #{jn_manageeamil},jn_managetel = #{jn_managetel},jn_managesex = #{jn_managesex} where jn_manageid = #{jn_manageid}
+    </update>
+
+</mapper>
+

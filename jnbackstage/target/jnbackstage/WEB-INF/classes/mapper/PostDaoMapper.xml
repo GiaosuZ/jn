@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，为了对sql语句进行隔离，方便管理 ，mapper开发dao方式，使用namespace有特殊作用 -->
+<mapper namespace="com.etc.jnbackstage.dao.PostDao">
+<!-- 在mapper.xml文件中配置很多的sql语句，执行每个sql语句时，封装为MappedStatement对象
+mapper.xml以statement为单位管理sql语句
+ -->
+    <select id="queryecharsDateandecharsCount" resultType="echarsDto">
+        select substring(jn_posttime,1,10) as echarsDate,count(*) as echarsCount from jn_post group by jn_posttime
+    </select>
+    <select id="queryPostInfo" resultType="postDto" parameterType="postDto">
+        select jp.jn_postid,jp.jn_posttitle,jpt.jn_posttypename,ju.jn_username,jp.jn_posttime,jp.jn_poststatus from jn_post as jp  inner join jn_posttype as jpt inner join jn.jn_user as ju  on ju.jn_userid=jp.jn_userid
+        <where>
+            <if test="jn_username!=null">
+                and ju.jn_username like #{jn_username}
+            </if>
+            <if test="jn_posttime!=null">
+                and jp.jn_posttime like #{jn_posttime}
+            </if>
+            <if test="jn_posttypename!=null">
+                and jpt.jn_posttypename like #{jn_posttypename}
+            </if>
+            <if test="jn_posttitle!=null">
+                and jp.jn_posttitle like #{jn_posttitle}
+            </if>
+            <if test="jn_poststatus!=null">
+                and jp.jn_poststatus like #{jn_poststatus}
+            </if>
+        </where>
+    </select>
+    <select id="queryPostAllCount" parameterType="postDto" resultType="postTotalDto">
+        select count(*) as postall from jn_post as jp  inner join jn_posttype as jpt inner join jn.jn_user as ju  on ju.jn_userid=jp.jn_userid
+        <where>
+            <if test="jn_username!=null">
+                and ju.jn_username like #{jn_username}
+            </if>
+            <if test="jn_posttime!=null">
+                and jp.jn_posttime like #{jn_posttime}
+            </if>
+            <if test="jn_posttypename!=null">
+                and jpt.jn_posttypename like #{jn_posttypename}
+            </if>
+            <if test="jn_posttitle!=null">
+                and jp.jn_posttitle like #{jn_posttitle}
+            </if>
+            <if test="jn_poststatus!=null">
+                and jp.jn_poststatus like #{jn_poststatus}
+            </if>
+        </where>
+    </select>
+    <update id="updatePostByPostid" parameterType="integer">
+        update jn_post set jn_poststatus = "0" where jn_postid = #{param1}
+    </update>
+    <update id="updatePostsByPostid" parameterType="integer">
+        update jn_post set jn_poststatus = "0" where jn_postid = #{param1}
+    </update>
+    <update id="updatePostOpenByPostid" parameterType="integer">
+        update jn_post set jn_poststatus = "1" where jn_postid = #{param1}
+    </update>
+</mapper>
+
