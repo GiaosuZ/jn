@@ -1,0 +1,22 @@
+spring:
+  mvc:
+    view:
+      prefix: /          #视图解析器前缀
+      suffix: .jsp       #视图解析器后缀
+  application:
+    name: jn
+  datasource:         #配置数据源
+    url: jdbc:mysql://47.97.113.72:3306/jn?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    tomcat:           #配置连接池参数
+      max-active: 100
+      max-wait: 10000
+      max-idle: 50
+      min-idle: 10
+
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.etc.jn.dto,com.etc.jn.entity,com.etc.jn.vo

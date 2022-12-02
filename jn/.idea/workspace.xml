@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f0cf3d-0a6b-4fde-a643-c150b4c9cc38" name="Default Changelist" comment="粉丝 收藏的静态页面">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,6 +114,9 @@
     <option name="FILTER_INFO" value="true" />
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -312,7 +316,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1667462315029" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../NMMoive" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -522,6 +530,13 @@
       <workItem from="1668475208073" duration="279000" />
       <workItem from="1669011461349" duration="230000" />
       <workItem from="1669083223154" duration="4000" />
+      <workItem from="1669090714828" duration="1026000" />
+      <workItem from="1669092253722" duration="37000" />
+      <workItem from="1669092410427" duration="23000" />
+      <workItem from="1669096759478" duration="138000" />
+      <workItem from="1669097911671" duration="22000" />
+      <workItem from="1669103045396" duration="12000" />
+      <workItem from="1669118411977" duration="70000" />
     </task>
     <task id="LOCAL-00001" summary="粉丝 收藏的静态页面">
       <created>1667199070543</created>
